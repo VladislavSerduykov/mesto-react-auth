@@ -60,7 +60,6 @@ function Register({ handleInfoMessage }) {
           <form
             className="register__container"
             onSubmit={handleSubmit}
-            noValidate
           >
             <input
               id="email-input"

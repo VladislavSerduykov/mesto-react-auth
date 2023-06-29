@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 function Main({
   cards,
@@ -17,9 +18,9 @@ function Main({
   const currentUser = React.useContext(CurrentUserContext);
 
   return (<>
-    <Header isWrapped={true}>
+    <Header>
       <p className="header__nav_text">{email}</p>
-      <button href="#" className="header__nav_button" type="button" onClick={onLogout}></button>
+      <Link to="/sign-in" onClick={onLogout} className='header__nav_button' style={{color:'#fff'}}>Выйти</Link>
     </Header>
     <main>
       <section className="profile">

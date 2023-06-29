@@ -1,5 +1,5 @@
 import "../index.css";
-import React from "react";
+import { useEffect, useState } from "react";
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
@@ -17,42 +17,42 @@ import auth from "../utils/auth";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = useState({});
 
-  const [cards, setCards] = React.useState([]);
+  const [cards, setCards] = useState([]);
 
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
 
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
 
-  const [deletedCard, setDeletedCard] = React.useState(null);
-  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [deletedCard, setDeletedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState("");
-  const [infoMessage, setInfoMessage] = React.useState()
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [infoMessage, setInfoMessage] = useState();
 
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
+  useEffect(() => {
+    if (isLoggedIn) {
+      api
+        .getUserInfo()
+        .then((res) => {
+          setCurrentUser(res);
+        })
+        .catch((err) => console.log(err));
 
-    api
-      .getCardList()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+      api
+        .getCardList()
+        .then((res) => {
+          setCards(res);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -131,7 +131,7 @@ function App() {
       .catch(console.error);
   }
   // Авторизация
-  React.useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       auth
@@ -205,7 +205,7 @@ function App() {
           <Route
             path="*"
             element={
-              isLoggedIn ? <Navigate to="/"/> : <Navigate to="/sign-up"/>
+              isLoggedIn ? <Navigate to="/" /> : <Navigate to="/sign-up" />
             }
           />
         </Routes>
