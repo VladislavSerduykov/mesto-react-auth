@@ -19,8 +19,10 @@ function Main({
 
   return (<>
     <Header>
+      <div className="header__nav">
       <p className="header__nav_text">{email}</p>
-      <Link to="/sign-in" onClick={onLogout} className='header__nav_button' style={{color:'#fff'}}>Выйти</Link>
+      <Link to="/sign-in" onClick={onLogout} className='header__nav_button'>Выйти</Link>
+      </div>
     </Header>
     <main>
       <section className="profile">

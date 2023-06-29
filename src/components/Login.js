@@ -47,7 +47,7 @@ function Login({ handleInfoMessage, onLogin }) {
     <>
       <Header>
         <div className="header__nav">
-          <Link style={{color: '#A9A9A9'}} className="header__nav_button" to="/sign-up">
+          <Link style={{color: '#fff'}} className="header__nav_button" to="/sign-up">
             Регистрация
           </Link>
         </div>
